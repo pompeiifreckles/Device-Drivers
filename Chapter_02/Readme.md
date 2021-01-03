@@ -130,24 +130,23 @@
    ```
 
    **Data Types:**
-   bool, invbool
-   charp
-   int
-   long
-   short
-   uint
-   ulong
+   bool, invbool\
+   charp\
+   int\
+   long\
+   short\
+   uint\
+   ulong\
    ushort
     
    **Array parameters:**
    ``` C
    module_param_array(name, type, num, perm);
    ```
-   name - name of the array
-
+   name - name of the array\
    num - number of elements
 
-   **permission: <linux/stat.h>**
+   **Permission: <linux/stat.h>**
 
    This value controls who can access the representation of module parameter in sysfs
    perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
