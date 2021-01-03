@@ -62,7 +62,7 @@
   **current->pid**    process id
 
 ## insmod, rmmod, modprobe
-  **insmod:**\ 
+  **insmod:**\
     It relies on syscall the function `sys_init_module` from `<kernel/module.h>`\
     Allocates kernel memory with vmalloc\
     Copies modules text into that memory region.\
