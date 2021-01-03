@@ -30,9 +30,9 @@
   obj-m := hello.o        // multiple files
   module-objs := file1.o file2.o
 
-  make -C /path/to/src/tree M=`pwd` modules
+  # make that can be invoked directly from the cli, this might become tiresome
+  # make -C /path/to/src/tree M=`pwd` modules
 
-  Above Makefile becomes tiresome
   # If KERNELRELEASE is defined, we've been invoked from the
   # kernel build system and can use its language.
   ifneq ($(KERNELRELEASE),)
@@ -120,14 +120,14 @@
 
 ## Module Parameters: moduleparam.h
   
-  insmod hellop howmany=10 whom="Mom"
+  _**insmod hellop howmany=10 whom="Mom"**_
 
     static char *whom = "world";
     static int howmany = 1;
     module_param(howmany, int, S_IRUGO);
     module_param(whom, charp, S_IRUGO);
 
-    data types:
+   **data types:**
     bool, invbool
     charp
     int
@@ -137,15 +137,15 @@
     ulong
     ushort
     
-    Array parameters:
+   **Array parameters:**
     mdoule_param_array(name, type, num, perm);
     name - name of the array
     num - number of elements
 
-    permission: <linux/stat.h>
+   **permission: <linux/stat.h>**
     this value controls who can access the representation of module parameter in sysfs
     perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
     S_IRUGO           read-only
     S_IRUGO|S_IWUSR   read and write
 
-    NOTE: you should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
+   NOTE: you should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
