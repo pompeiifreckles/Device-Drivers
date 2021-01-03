@@ -24,7 +24,7 @@
 
 ## Makefile
 
-```
+``` Makefile
   obj-m := hello.o        // single file
 
   obj-m := hello.o        // multiple files
