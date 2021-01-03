@@ -134,7 +134,7 @@
 
 ## Module Parameters: moduleparam.h
   
-  _insmod hellop howmany=10 whom="Mom"_\
+  _insmod hellop howmany=10 whom="Mom"_
    ``` C
     static char *whom = "world";
     static int howmany = 1;
