@@ -1,0 +1,58 @@
+* Building and Running Modules *
+
+-> kernel modules vs applications
+  most small and medium sized applications perform a single task from beginning to end
+  every kernel module just registers itself to serve future requests
+  not every application is event-driven but every kernel module is
+  Application that terminates can be lazy in releasing resources or avoid cleanup altogether
+  the exit function of a module must carefully undo everything the init function built up
+  difference in fault handling
+   - a segmentation fault may be harmless during application development
+   - a kernel fault kills the process atleast, if not the whole system
+  Applications are laid out in virtual memory with a very large stack area
+  Kernel instead has a very small stack, as small as a single 4096 byte page
+  (Thus it is never good idea to declare large automatic variables, instead dynamically allocate at call time)
+  Kernel code cannot do floating point arithmatic (since kernel does not need floating point, the extra overhead is not worthwhile)
+
+-> kernel space vs user space
+  The operating system must account for independent operation of programs and protection against unauthorized access to resources.
+  This nontrivial task is possible only if the CPU enforces protection of system software from the applications.
+  Every modern processor is able to enforce this behavior. The chosen approach is to implement different operating modalities in CPU itself.
+  Unix systems are designed to take advantage of this hardware feature using two such levels.
+  Under Unix, kernel executes in the highest level (also called supervisor mode), where everything is allowed.
+  whereas applications execute at the lowest level (the so-called user mode), where the processor regulates the direct access to hardware and unauthorized access to memory.
+
+-> Makefile
+  obj-m := hello.o        // single file
+
+  obj-m := hello.o        // multiple files
+  module-objs := file1.o file2.o
+
+  make -C /path/to/src/tree M=`pwd` modules
+
+  Above Makefile becomes tiresome
+  # If KERNELRELEASE is defined, we've been invoked from the
+  # kernel build system and can use its language.
+  ifneq ($(KERNELRELEASE),)
+    obj-m := hello.o
+  # Otherwise we were directly called from the command
+  # line; invoke the kernel build system
+  else
+
+    KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+    PWD := $(shell pwd)
+
+  default:
+    $(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+
+  endif
+
+-> Current Process
+  Kernel code can refer to the current process by accessing the global item current defined in <asm/current.h>,
+  which yields a pointer to struct task_struct, defined in <linux/sched.h>
+
+  printk(KERN_INFO "The process is \"%s\" (pid %i)\n", current->comm, current->pid);
+
+  current->comm   base name of the program
+  current->pid    process id
+

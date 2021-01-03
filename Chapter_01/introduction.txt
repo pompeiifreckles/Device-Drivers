@@ -1,0 +1,4 @@
+Device dirvers are of three classes
+1. Character devices    (/dev/console, /dev/tty0)
+2. Block Devices
+3. Network Interfaces

@@ -1,0 +1,8 @@
+-> Current Process
+  Kernel code can refer to the current process by accessing the global item current defined in <asm/current.h>,
+  which yields a pointer to struct task_struct, defined in <linux/sched.h>
+
+  printk(KERN_INFO "The process is \"%s\" (pid %i)\n", current->comm, current->pid);
+
+  current->comm   base name of the program
+  current->pid    process id
