@@ -122,10 +122,12 @@
   
   _**insmod hellop howmany=10 whom="Mom"**_
 
+   ``` C
     static char *whom = "world";
     static int howmany = 1;
     module_param(howmany, int, S_IRUGO);
     module_param(whom, charp, S_IRUGO);
+   ```
 
    **Data Types:**
    bool, invbool
@@ -142,12 +144,17 @@
    module_param_array(name, type, num, perm);
    ```
    name - name of the array
+
    num - number of elements
 
    **permission: <linux/stat.h>**
+
    This value controls who can access the representation of module parameter in sysfs
    perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
-   S_IRUGO           read-only
-   S_IRUGO|S_IWUSR   read and write
+   
+   ```
+   S_IRUGO           // read-only
+   S_IRUGO|S_IWUSR   // read and write
+   ```
 
    NOTE: you should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
