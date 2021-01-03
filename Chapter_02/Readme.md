@@ -1,12 +1,12 @@
 # Building and Running Modules 
 
 ## Kernel Modules vs Applications
-  most small and medium sized applications perform a single task from beginning to end\
-  every kernel module just registers itself to serve future requests\
-  not every application is event-driven but every kernel module is\
+  Most small and medium sized applications perform a single task from beginning to end\
+  Every kernel module just registers itself to serve future requests\
+  Not every application is event-driven but every kernel module is\
   Application that terminates can be lazy in releasing resources or avoid cleanup altogether\
-  the exit function of a module must carefully undo everything the init function built up\
-  difference in fault handling\
+  The exit function of a module must carefully undo everything the init function built up\
+  Difference in fault handling
    - a segmentation fault may be harmless during application development
    - a kernel fault kills the process atleast, if not the whole system
   Applications are laid out in virtual memory with a very large stack area\
@@ -20,7 +20,7 @@
   Every modern processor is able to enforce this behavior. The chosen approach is to implement different operating modalities in CPU itself.\
   Unix systems are designed to take advantage of this hardware feature using two such levels.\
   Under Unix, kernel executes in the highest level (also called supervisor mode), where everything is allowed.\
-  whereas applications execute at the lowest level (the so-called user mode), where the processor regulates the direct access to hardware and unauthorized access to memory.
+  Whereas applications execute at the lowest level (the so-called user mode), where the processor regulates the direct access to hardware and unauthorized access to memory.
 
 ## Makefile
 
@@ -63,22 +63,22 @@
 
 ## insmod, rmmod, modprobe
   **insmod:** 
-    it relies on syscall the function `sys_init_module` from `<kernel/module.h>`\
-    allocates kernel memory with vmalloc\
-    copies modules text into that memory region.\
-    resolves kernel references in module via kernel symbol table.\
-    calls the module's initialization function to get everything going.
+    It relies on syscall the function `sys_init_module` from `<kernel/module.h>`\
+    Allocates kernel memory with vmalloc\
+    Copies modules text into that memory region.\
+    Resolves kernel references in module via kernel symbol table.\
+    Calls the module's initialization function to get everything going.
 
   **modprobe:** 
-    like insmod, loads a module into the kernel.\
+    Like insmod, loads a module into the kernel.\
     It differs in taht int will look at the modules to be loaded to see whether it references\
-    any symbols that are not currently defined in the kernel.\
+    Any symbols that are not currently defined in the kernel.\
     modprobe looks for other modules in the current module search path that defines the relevant symbols.\
     It also loads those modules into the kernels as well.
 
   **rmmod:** 
-    removes the module after eaxecuting the cleanup function.\
-    fails if the modules is busy (example - module has opened a file)
+    Removes the module after eaxecuting the cleanup function.\
+    Fails if the modules is busy (example - module has opened a file)
 
 ## Version Dependency
   **UTS_RELEASE:** macro expands to string describing the version of the kernel. "2.6.10"\
@@ -129,8 +129,8 @@
   module_exit(cleanup_function);
   ```
   The cleanup function has no value to return, so it is declared void\
-  `__exit` modifier marks for unload only. If module is built directly into kernel it is discarded\
-  `__exit` functions are called only at the time of unload and shutdown, any other use is an error
+  **__exit** modifier marks for unload only. If module is built directly into kernel it is discarded\
+  **__exit** functions are called only at the time of unload and shutdown, any other use is an error
 
 ## Module Parameters: moduleparam.h
   
@@ -160,7 +160,7 @@
    num - number of elements
 
    **Permission: <linux/stat.h>**\
-   This value controls who can access the representation of module parameter in sysfs
+   This value controls who can access the representation of module parameter in sysfs\
    perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
    
    ```
