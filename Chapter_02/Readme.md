@@ -127,25 +127,27 @@
     module_param(howmany, int, S_IRUGO);
     module_param(whom, charp, S_IRUGO);
 
-   **data types:**
-    bool, invbool
-    charp
-    int
-    long
-    short
-    uint
-    ulong
-    ushort
+   **Data Types:**
+   bool, invbool
+   charp
+   int
+   long
+   short
+   uint
+   ulong
+   ushort
     
    **Array parameters:**
-    mdoule_param_array(name, type, num, perm);
-    name - name of the array
-    num - number of elements
+   ``` C
+   module_param_array(name, type, num, perm);
+   ```
+   name - name of the array
+   num - number of elements
 
    **permission: <linux/stat.h>**
-    this value controls who can access the representation of module parameter in sysfs
-    perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
-    S_IRUGO           read-only
-    S_IRUGO|S_IWUSR   read and write
+   This value controls who can access the representation of module parameter in sysfs
+   perm is set to 0, there is nos sysfs entry at all; otherwise appears in /sys/module
+   S_IRUGO           read-only
+   S_IRUGO|S_IWUSR   read and write
 
    NOTE: you should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
