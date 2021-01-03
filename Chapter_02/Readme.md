@@ -12,7 +12,7 @@
   Applications are laid out in virtual memory with a very large stack area\
   Kernel instead has a very small stack, as small as a single 4096 byte page\
   (Thus it is never good idea to declare large automatic variables, instead dynamically allocate at call time)\
-  Kernel code cannot do floating point arithmatic (since kernel does not need floating point, the extra overhead is not worthwhile)\
+  Kernel code cannot do floating point arithmatic (since kernel does not need floating point, the extra overhead is not worthwhile)
 
 ## Kernel Space vs User Space
   The operating system must account for independent operation of programs and protection against unauthorized access to resources.\
@@ -20,7 +20,7 @@
   Every modern processor is able to enforce this behavior. The chosen approach is to implement different operating modalities in CPU itself.\
   Unix systems are designed to take advantage of this hardware feature using two such levels.\
   Under Unix, kernel executes in the highest level (also called supervisor mode), where everything is allowed.\
-  whereas applications execute at the lowest level (the so-called user mode), where the processor regulates the direct access to hardware and unauthorized access to memory.\
+  whereas applications execute at the lowest level (the so-called user mode), where the processor regulates the direct access to hardware and unauthorized access to memory.
 
 ## Makefile
 
@@ -67,23 +67,23 @@
     allocates kernel memory with vmalloc\
     copies modules text into that memory region.\
     resolves kernel references in module via kernel symbol table.\
-    calls the module's initialization function to get everything going.\
+    calls the module's initialization function to get everything going.
 
   **modprobe:** 
     like insmod, loads a module into the kernel.\
     It differs in taht int will look at the modules to be loaded to see whether it references\
     any symbols that are not currently defined in the kernel.\
     modprobe looks for other modules in the current module search path that defines the relevant symbols.\
-    It also loads those modules into the kernels as well.\
+    It also loads those modules into the kernels as well.
 
   **rmmod:** 
     removes the module after eaxecuting the cleanup function.\
-    fails if the modules is busy (example - module has opened a file)\
+    fails if the modules is busy (example - module has opened a file)
 
 ## Version Dependency
   **UTS_RELEASE:** macro expands to string describing the version of the kernel. "2.6.10"\
   **LINUX_VERSION_CODE:** returns version one byte per version release number. "2.6.10" -> 0x02060a (132618)\
-  **KERNEL_VERSION(major, minor, release):** returns kernel version in decimal. "2.6.10" -> 132618\
+  **KERNEL_VERSION(major, minor, release):** returns kernel version in decimal. "2.6.10" -> 132618
 
 ## Exporting symbols
   ``` C
@@ -116,8 +116,8 @@
   module_init(initialization_function);
   ```
 
-  __init (and __initdata) are optional but worth the effort. The module loader drops the intialization function (and data structures) and clears the memory after its loaded.
-  __devinit (and __devinitdata) are for kernels not configured for hotpluggable devices
+  **__init (and __initdata)** are optional but worth the effort. The module loader drops the intialization function (and data structures) and clears the memory after its loaded.\
+  **__devinit (and __devinitdata)** are for kernels not configured for hotpluggable devices
 
 ## Cleanup Function
 
@@ -128,9 +128,9 @@
 
   module_exit(cleanup_function);
   ```
-  The cleanup function has no value to return, so it is declared void
-  __exit modifier marks for unload only. If module is built directly into kernel it is discarded
-  __exit functions are called only at the time of unload and shutdown, any other use is an error
+  The cleanup function has no value to return, so it is declared void\
+  `__exit` modifier marks for unload only. If module is built directly into kernel it is discarded\
+  `__exit` functions are called only at the time of unload and shutdown, any other use is an error
 
 ## Module Parameters: moduleparam.h
   
@@ -168,4 +168,4 @@
    S_IRUGO|S_IWUSR   // read and write
    ```
 
-   NOTE: you should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
+   NOTE: You should not make module parameters writable, unless you are prepared to detect the change and react accordingly.
