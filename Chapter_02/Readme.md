@@ -25,9 +25,9 @@
 ## Makefile
 
 ``` Makefile
-  obj-m := hello.o        // single file
+  obj-m := hello.o        # single file
 
-  obj-m := hello.o        // multiple files
+  obj-m := hello.o        # multiple files
   module-objs := file1.o file2.o
 
   # make that can be invoked directly from the cli, this might become tiresome
@@ -62,21 +62,21 @@
   **current->pid**    process id
 
 ## insmod, rmmod, modprobe
-  **insmod:** 
+  **insmod:**\ 
     It relies on syscall the function `sys_init_module` from `<kernel/module.h>`\
     Allocates kernel memory with vmalloc\
     Copies modules text into that memory region.\
     Resolves kernel references in module via kernel symbol table.\
     Calls the module's initialization function to get everything going.
 
-  **modprobe:** 
+  **modprobe:**\
     Like insmod, loads a module into the kernel.\
     It differs in taht int will look at the modules to be loaded to see whether it references\
     Any symbols that are not currently defined in the kernel.\
     modprobe looks for other modules in the current module search path that defines the relevant symbols.\
     It also loads those modules into the kernels as well.
 
-  **rmmod:** 
+  **rmmod:**\
     Removes the module after eaxecuting the cleanup function.\
     Fails if the modules is busy (example - module has opened a file)
 
