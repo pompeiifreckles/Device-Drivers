@@ -1,6 +1,6 @@
-#Char Drivers
+# Char Drivers
 
-##scull (Simple Character Utility for Loading Localities)
+## scull (Simple Character Utility for Loading Localities)
   scull0 to scull3: global and persistent devices. Global - accessible to all file descriptors. Persistent - data isn't lost while opening and closing
   scullpipe0 to scullpipe3: Four FIFO devices - one process reads while other write
   scullsingle: only one process can use the driver at a time
