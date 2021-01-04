@@ -11,3 +11,22 @@
   - scullpriv: private memory spaces for every process accessing it
   - sculluid: can be accessed by multiple processes but by only one user. "Device Busy" for other users
   - scullwuid: can be accessed by multiple processes but by only one user. Blocking open for other users
+
+
+## Major and Minor Numbers
+  Major number identifies the driver associated with the device. For example, /dev/null and /dev/zero are both managed by driver 1, whereas virtual consoles and serial terminals are managed by driver 4.
+
+  Minor number is used by kernel to determine exactly which device is being referred to.
+
+  In short, device number is a 32-bit quantity with 12 bits set aside for major number and 20 for minor number.
+
+  Make use of a set of macros found in `<linux/kdev_t.h>` to obtain major and minor parts of `dev_t`
+  ``` C
+  MAJOR(dev_t dev);
+  MINOR(dev_t dev);
+  ```
+
+  If you need to make device number from major and minor part
+  ``` C
+  MKDEV(int major, int minor);
+  ```
