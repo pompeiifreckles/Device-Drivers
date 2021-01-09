@@ -4,12 +4,12 @@
 MODULE_LICENSE("Dual BSD/GPL");
 
 static int hello_init(void) {
-  printk(KERN_WARNING "Hello, World!\n");
+  printk(KERN_ALERT "Hello, World!\n");
   return 0;
 }
 
 static void hello_exit(void) {
-  printk(KERN_WARNING "Goodbye, Cruel World!");
+  printk(KERN_ALERT "Goodbye, Cruel World!");
 }
 
 module_init(hello_init);
