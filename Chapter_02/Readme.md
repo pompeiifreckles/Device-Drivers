@@ -9,6 +9,7 @@
   Difference in fault handling
    - a segmentation fault may be harmless during application development
    - a kernel fault kills the process atleast, if not the whole system
+   
   Applications are laid out in virtual memory with a very large stack area\
   Kernel instead has a very small stack, as small as a single 4096 byte page\
   (Thus it is never good idea to declare large automatic variables, instead dynamically allocate at call time)\
