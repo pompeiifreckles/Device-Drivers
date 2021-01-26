@@ -1,5 +1,5 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m := hello.o
+	obj-m := current_proc.o
 
 else 
 	KERNELDIR ?= /lib/modules/$(shell uname -r)/build

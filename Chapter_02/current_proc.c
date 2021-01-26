@@ -5,14 +5,14 @@
 
 MODULE_LICENSE("Dual BSD/GPL");
 
-static int hello_init(void) {
+static __init int hello_init(void) {
   printk(KERN_ALERT "Hello, World\n");
   printk(KERN_ALERT "The process is %s (pid %i)\n", current->comm,\
       current->pid);
   return 0;
 }
 
-static void hello_exit(void) {
+static __exit void hello_exit(void) {
   printk(KERN_ALERT "Goodbye, Cruel World\n");
 }
 
