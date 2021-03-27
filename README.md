@@ -12,5 +12,5 @@ This repo also serves the purpose of documenting my own progress and noting the 
 
 ## I want to write drivers, where do I start?
 Visit [kernel newbies](https://kernelnewbies.org/), it's got a lot of resources listed there.\
-Read the book Kernel Device Drivers by Greg Kroah Hartman.\
+Read the book "Kernel Device Drivers" _by Greg Kroah Hartman_.\
 Connect with maintainers over IRC.
